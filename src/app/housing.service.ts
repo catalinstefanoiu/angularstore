@@ -8,7 +8,7 @@ import { HousingLocation } from './housing-location';
 export class HousingService {
   firestore = inject(Firestore);
 
-  url = "http://localhost:3000/locations";
+  //url = "http://localhost:3000/locations";
 
   constructor() { }
 
