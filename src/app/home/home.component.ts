@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
 import { HousingLocation } from '../housing-location';
@@ -6,7 +6,10 @@ import { HousingService } from '../housing.service';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, HousingLocationComponent],
+  imports: [
+    CommonModule,
+    HousingLocationComponent
+  ],
   template: `
     <section>
       <form>
@@ -22,12 +25,17 @@ import { HousingService } from '../housing.service';
   `,
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   housingLocationList: HousingLocation[] = [];
   housingService: HousingService = inject (HousingService);
   filteredLocationList:HousingLocation[] = [];
 
   constructor() {
+    
+  }
+
+  ngOnInit(): void {
+    console.log('HomeComponent::onInit');
     this.housingService.getAllHousingLocations().then((housingLocationList: HousingLocation[]) => {
       this.housingLocationList = housingLocationList;
       this.filteredLocationList = housingLocationList;
